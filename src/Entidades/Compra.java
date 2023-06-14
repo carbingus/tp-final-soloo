@@ -6,19 +6,30 @@ public class Compra {
     private int id_compra;
     private Proveedor proveedor;
     private LocalDate fecha;
+    private boolean estado;
 
     public Compra() {
     }
 
-    public Compra(Proveedor proveedor, LocalDate fecha) {
+    public Compra(Proveedor proveedor, LocalDate fecha, boolean estado) {
         this.proveedor = proveedor;
         this.fecha = fecha;
+        this.estado = estado;
     }
 
-    public Compra(int id_compra, Proveedor proveedor, LocalDate fecha) {
+    public Compra(int id_compra, Proveedor proveedor, LocalDate fecha, boolean estado) {
         this.id_compra = id_compra;
         this.proveedor = proveedor;
         this.fecha = fecha;
+        this.estado = estado;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public int getId_compra() {

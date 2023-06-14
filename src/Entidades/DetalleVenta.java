@@ -1,7 +1,7 @@
 package Entidades;
 
 public class DetalleVenta {
-    private int idDetalleVenta;
+    private int id_detalleVenta;
     private int cantidad;
     private double precioVenta;
     private Venta venta;
@@ -17,20 +17,20 @@ public class DetalleVenta {
         this.producto = producto;
     }
 
-    public DetalleVenta(int idDetalleVenta, int cantidad, double precioVenta, Venta venta, Producto producto) {
-        this.idDetalleVenta = idDetalleVenta;
+    public DetalleVenta(int id_detalleVenta, int cantidad, double precioVenta, Venta venta, Producto producto) {
+        this.id_detalleVenta = id_detalleVenta;
         this.cantidad = cantidad;
         this.precioVenta = precioVenta;
         this.venta = venta;
         this.producto = producto;
     }
 
-    public int getIdDetalleVenta() {
-        return idDetalleVenta;
+    public int getId_detalleVenta() {
+        return id_detalleVenta;
     }
 
-    public void setIdDetalleVenta(int idDetalleVenta) {
-        this.idDetalleVenta = idDetalleVenta;
+    public void setId_detalleVenta(int id_detalleVenta) {
+        this.id_detalleVenta = id_detalleVenta;
     }
 
     public int getCantidad() {
@@ -67,7 +67,7 @@ public class DetalleVenta {
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", cantidad=" + cantidad + ", precioVenta=" + precioVenta + ", venta=" + venta + ", producto=" + producto + '}';
+        return "DetalleVenta{" + "id_detalleVenta=" + id_detalleVenta + ", cantidad=" + cantidad + ", precioVenta=" + precioVenta + ", venta=" + venta + ", producto=" + producto + '}';
     }
     
 }

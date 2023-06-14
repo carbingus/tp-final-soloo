@@ -1,37 +1,62 @@
 package Entidades;
 
 public class Cliente {
-    private int idCliente;
+    private int id_cliente;
     private String apellido;
     private String nombre;
     private String domicilio;
-    private String telefono;
+    private int dni;
+    private int telefono;
+    
+    private boolean estado;
 
     public Cliente() {
     }
 
-    public Cliente(String apellido, String nombre, String domicilio, String telefono) {
+    public Cliente(String apellido, String nombre, String domicilio, int dni, int telefono, boolean estado) {
         this.apellido = apellido;
         this.nombre = nombre;
         this.domicilio = domicilio;
+        this.dni = dni;
         this.telefono = telefono;
+        this.estado = estado;
     }
 
-    public Cliente(int idCliente, String apellido, String nombre, String domicilio, String telefono) {
-        this.idCliente = idCliente;
+    public Cliente(int id_cliente, String apellido, String nombre, String domicilio, int dni, int telefono, boolean estado) {
+        this.id_cliente = id_cliente;
         this.apellido = apellido;
         this.nombre = nombre;
         this.domicilio = domicilio;
+        this.dni = dni;
         this.telefono = telefono;
+        this.estado = estado;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
+    
 
     public String getApellido() {
         return apellido;
@@ -57,17 +82,19 @@ public class Cliente {
         this.domicilio = domicilio;
     }
 
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", apellido=" + apellido + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
+        return "Cliente{" + "id_cliente=" + id_cliente + ", apellido=" + apellido + ", nombre=" + nombre + ", domicilio=" + domicilio + ", dni=" + dni + ", telefono=" + telefono + ", estado=" + estado + '}';
     }
+
+
     
 }

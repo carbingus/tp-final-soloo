@@ -27,12 +27,13 @@ public class ProveedorData {
     }
     public void guardarProveedor(Proveedor proveedor){
         // TODO:
-        String sql = "INSERT INTO proveedor (razonSocial, domicilio, telefono) VALUES ( ?, ?, ?)";
+        String sql = "INSERT INTO proveedor (razonSocial, domicilio, telefono, estado) VALUES ( ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,proveedor.getRazonSocial());
             ps.setString(2,proveedor.getDomicilio());
             ps.setInt(3, proveedor.getTelefono());
+            ps.setBoolean(4, proveedor.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()){
@@ -51,7 +52,7 @@ public class ProveedorData {
     }
     public Proveedor modificarProveedor(Proveedor proveedor){
         // TODO:
-        String sql = "UPDATE proveedor SET razonSocial = ?, domicilio = ?, telefono = ? WHERE idProveedor = ?";
+        String sql = "UPDATE proveedor SET razonSocial = ?, domicilio = ?, telefono = ?, estado = ? WHERE idProveedor = ?";
         PreparedStatement ps = null;
         
         try{
@@ -59,6 +60,7 @@ public class ProveedorData {
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
             ps.setInt(3, proveedor.getTelefono());
+            ps.setBoolean(4, proveedor.isEstado());
             int logro = ps.executeUpdate();
             
             if (logro == 1){
@@ -98,7 +100,7 @@ public class ProveedorData {
     
     public Proveedor buscarProveedor(int id){
         Proveedor proveedor = new Proveedor();
-        String sql = "SELECT razonSocial, domicilio, telefono FROM proveedor WHERE idProveedor = ?;";
+        String sql = "SELECT razonSocial, domicilio, telefono, estado FROM proveedor WHERE idProveedor = ?;";
         PreparedStatement ps = null;
         
         try{
@@ -110,6 +112,7 @@ public class ProveedorData {
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
                 proveedor.setTelefono(rs.getInt("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
                 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el proveedor indicado.");
