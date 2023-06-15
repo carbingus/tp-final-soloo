@@ -28,7 +28,7 @@ public class ClienteData {
             ps.setString(2, cliente.getApellido()); //asignamos apellido
             ps.setString(3, cliente.getDomicilio()); // asignamos domicilio
             ps.setInt(4, cliente.getDni());
-            ps.setInt(5, cliente.getTelefono()); //asignamos telefono
+            ps.setString(5, cliente.getTelefono()); //asignamos telefono
             ps.setBoolean(6, cliente.isEstado());
             ps.executeUpdate(); // le decimos al PreparedStatement que introduzca los datos a la BD
             ResultSet rs = ps.getGeneratedKeys(); // pedimos las keys generadas para poder utilizarlas
@@ -46,21 +46,22 @@ public class ClienteData {
         }
         }
     
-    public Cliente buscarCliente (int dni){
+    public Cliente buscarCliente (int id){
         Cliente cliente = new Cliente();
-        String sql = "SELECT nombre, apellido, domicilio, telefono, estado FROM cliente WHERE documento = ?";
+        String sql = "SELECT nombre, apellido, domicilio, telefono, documento, estado FROM cliente WHERE idCliente = ?";
         PreparedStatement ps = null;
         try{
             ps = con.prepareStatement(sql);
-            ps.setInt(1, dni);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()){
-                cliente.setId_cliente(rs.getInt("idCliente"));
+                cliente.setId_cliente(id);
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setApellido(rs.getString("apellido"));
                 cliente.setDomicilio(rs.getString("domicilio"));
-                cliente.setTelefono(rs.getInt("telefono"));
+                cliente.setDni(rs.getInt("documento"));
+                cliente.setTelefono(rs.getString("telefono"));
                 cliente.setEstado(rs.getBoolean("estado"));
                 
             } else{
@@ -83,7 +84,7 @@ public class ClienteData {
             ps.setString(2, cliente.getApellido());
             ps.setString(3,cliente.getDomicilio());
             ps.setInt(4, cliente.getDni());
-            ps.setInt(5, cliente.getTelefono());
+            ps.setString(5, cliente.getTelefono());
             ps.setBoolean(6,cliente.isEstado());
             ps.setInt(7,cliente.getId_cliente());
             int logro = ps.executeUpdate();
@@ -115,7 +116,7 @@ public class ClienteData {
                 cliente.setApellido(rs.getString("apellido"));
                 cliente.setDomicilio(rs.getString("domicilio"));
                 cliente.setDni(rs.getInt("documento"));
-                cliente.setTelefono(rs.getInt("telefono"));
+                cliente.setTelefono(rs.getString("telefono"));
                 cliente.setEstado(rs.getBoolean("estado"));
                 clientes.add(cliente);
             }
@@ -126,6 +127,35 @@ public class ClienteData {
         }
         return clientes;
     }
-}
+        
+        public Cliente buscarClientePorDni(int dni){
+            Cliente cliente = null;
+            String sql = "SELECT idCliente, nombre, apellido, domicilio, documento, telefono, estado FROM cliente WHERE documento = ?";
+            PreparedStatement ps = null;
+            try {
+                ps = con.prepareStatement(sql);
+                ps.setInt(1,dni);
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()){
+                    cliente = new Cliente();
+                    cliente.setId_cliente(rs.getInt("idCliente"));
+                    cliente.setNombre(rs.getString("nombre"));
+                    cliente.setApellido(rs.getString("apellido"));
+                    cliente.setDomicilio(rs.getString("domicilio"));
+                    cliente.setTelefono(rs.getString("telefono"));
+                    cliente.setEstado(rs.getBoolean("estado"));
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "El DNI indicado no pertenece a un cliente dentro de"
+                            + "\nla base de datos, verifique que ha ingresado un documento correcto");
+                }
+                ps.close();
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null,"Error al acceder a tabla Clientes. Codigo: " +ex.getLocalizedMessage());
+            }
+            return cliente;
+        }
+    }
 
 

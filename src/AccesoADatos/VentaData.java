@@ -4,6 +4,7 @@
  */
 package AccesoADatos;
 
+import Entidades.*;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -13,71 +14,68 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import Entidades.*;
-import AccesoADatos.*;
 
-
-
+/**
+ *
+ * @author extha
+ */
 public class VentaData {
-    
-    private Connection con = null;
-    private ProductoData prodData = new ProductoData();
-    private ClienteData cliData = new ClienteData();
+    private Connection con = null;   
 
     public VentaData() {
         con = Conexion.getConexion();
     }
     
-     public void realizarVenta(DetalleVenta vent){
-        String sql = "INSERT INTO detalleventa (cantidad, precioVenta, idVenta, idProducto) VALUES (?, ?, ?, ?)";
+    public void registrarVenta(Venta venta, int id_cliente){
+        String sql = "INSERT INTO venta (fecha, idCliente) VALUES (?, ?);";
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, vent.getCantidad());
-            ps.setDouble(2, vent.getPrecioVenta());
-            ps.setInt(3, vent.getVenta().getId_venta());
-            ps.setInt(4, vent.getProducto().getId_producto());
+            ps.setDate(1, Date.valueOf(venta.getFecha()));
+            ps.setInt(2, id_cliente);
             
             ps.executeUpdate();
-            ResultSet rs = ps.executeQuery();
             
-            if (rs.next()){
-                vent.setId_detalleVenta(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Los detalles de venta se han guardado exitosamente.");
-                
+            ResultSet rs = ps.getGeneratedKeys();
+            
+            while (rs.next()){
+                venta.setId_venta(rs.getInt("idVenta"));
+                JOptionPane.showMessageDialog(null, "Venta guardada.");
             }
+            ps.close();
+            
         } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla DetalleVenta. Codigo: " + ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Ventas. Codigo: "+ ex.getLocalizedMessage());
         }
+        
     }
-     
-     public List<Venta> obtenerVentas(){
+    
+         public List<Venta> obtenerVentas(){
          List <Venta> ventas = new ArrayList<>();
          
          try {
-            String sql = "SELECT * FROM detalleventa;";
+            String sql = "SELECT * FROM venta;";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             Venta vend;
 
             while (rs.next()){
                 vend = new Venta();
-                vend.setId_venta(rs.getInt("idDetalleVenta"));
-                
-                Producto p = prodData.buscarProducto(rs.getInt("idProducto"));
-                vend.setProducto(p);
-                
-                Cliente c = cliData.buscarCliente(rs.getInt("idCliente"));
-                vend.setCliente(c);
-                
+                vend.setId_venta(rs.getInt("idVenta"));
                 vend.setFecha(rs.getDate("fecha").toLocalDate());
                 
+                Cliente c = new Cliente();
+                c.setId_cliente(rs.getInt("idCliente"));
+                vend.setCliente(c);
+                
+                ventas.add(vend);
             }
             ps.close();
             } catch (SQLException ex){
-                JOptionPane.showMessageDialog(null, "Error al acceder a tabla DetalleVenta. Codigo: "+ex.getLocalizedMessage());
+                JOptionPane.showMessageDialog(null, "Error al acceder a tabla Venta. Codigo: "+ex.getLocalizedMessage());
 
             }
          return ventas;
      }
+    
     
 }

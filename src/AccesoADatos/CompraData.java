@@ -15,36 +15,44 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import Entidades.*;
 import AccesoADatos.*;
-
-
+/**
+ *
+ * @author extha
+ */
 public class CompraData {
     
     private Connection con = null;
-
 
     public CompraData() {
         con = Conexion.getConexion();
     }
     
-    public void realizarPedido(DetalleCompra comp){
-        String sql = "INSERT INTO detallecompra (cantidad, precioCosto, idCompra, idProducto) VALUES (?, ?, ?, ?)";
-        try{
+    public void registrarCompra(Compra compra, int idProveedor) {
+
+        String sql = " INSERT INTO compra (idProveedor, fecha) VALUES (?,?) ";
+        try {
+
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, comp.getCantidad());
-            ps.setDouble(2, comp.getPrecioCosto());
-            ps.setInt(3, comp.getCompra().getId_compra());
-            ps.setInt(4, comp.getProducto().getId_producto());
-            
+            ps.setInt(1, idProveedor);
+            ps.setDate(2, Date.valueOf(compra.getFecha()));
+
             ps.executeUpdate();
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()){
-                comp.setId_detalle(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "El pedido se ha guardado exitosamente.");
-                
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            while (rs.next()) {
+                compra.setId_compra(rs.getInt("idCompra"));
+                JOptionPane.showMessageDialog(null, "Compra guardada");
             }
-        } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla DetalleCompra. Codigo: " + ex.getLocalizedMessage());
+
+            rs.close();
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla Compra. Codigo: "+ ex.getMessage());
+
         }
+
     }
+   
 }

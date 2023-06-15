@@ -6,22 +6,19 @@ public class Venta {
     private int id_venta;
     private LocalDate fecha;
     private Cliente cliente;
-    private Producto producto;
 
     public Venta() {
     }
 
-    public Venta(LocalDate fecha, Cliente cliente, Producto producto) {
+    public Venta(LocalDate fecha, Cliente cliente) {
         this.fecha = fecha;
         this.cliente = cliente;
-        this.producto = producto;
     }
 
-    public Venta(int id_venta, LocalDate fecha, Cliente cliente, Producto producto) {
+    public Venta(int id_venta, LocalDate fecha, Cliente cliente) {
         this.id_venta = id_venta;
         this.fecha = fecha;
         this.cliente = cliente;
-        this.producto = producto;
     }
 
     public int getId_venta() {
@@ -48,17 +45,10 @@ public class Venta {
         this.cliente = cliente;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
 
     @Override
     public String toString() {
-        return "Venta{" + "id_venta=" + id_venta + ", fecha=" + fecha + ", cliente=" + cliente + ", producto=" + producto + '}';
+        return "Venta{" + "id_venta=" + id_venta + ", fecha=" + fecha + ", cliente=" + cliente +'}';
     }
     
 }

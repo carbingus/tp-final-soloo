@@ -29,7 +29,7 @@ public class ProductoData {
     }
     
     public void registrarProducto(Producto producto){
-        String sql = "INSERT INTO producto (nombre, precio, cantidadProducto, estado) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO producto (nombre, precio, stock, estado) VALUES (?, ?, ?, ?)";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -50,7 +50,7 @@ public class ProductoData {
             ps. close();
             
         } catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto "+ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto. Codigo: "+ex.getLocalizedMessage());
             
         }
     }
