@@ -6,14 +6,13 @@ public class Cliente {
     private String nombre;
     private String domicilio;
     private int dni;
-    private int telefono;
-    
+    private String telefono;
     private boolean estado;
 
     public Cliente() {
     }
 
-    public Cliente(String apellido, String nombre, String domicilio, int dni, int telefono, boolean estado) {
+    public Cliente(String apellido, String nombre, String domicilio, int dni, String telefono, boolean estado) {
         this.apellido = apellido;
         this.nombre = nombre;
         this.domicilio = domicilio;
@@ -22,7 +21,7 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public Cliente(int id_cliente, String apellido, String nombre, String domicilio, int dni, int telefono, boolean estado) {
+    public Cliente(int id_cliente, String apellido, String nombre, String domicilio, int dni, String telefono, boolean estado) {
         this.id_cliente = id_cliente;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -82,11 +81,11 @@ public class Cliente {
         this.domicilio = domicilio;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

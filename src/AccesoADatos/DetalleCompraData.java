@@ -20,6 +20,7 @@ import AccesoADatos.*;
 public class DetalleCompraData {
     
     private Connection con = null;
+    private ProductoData prodData = new ProductoData();
 
 
     public DetalleCompraData() {
@@ -40,6 +41,7 @@ public class DetalleCompraData {
             
             if (rs.next()){
                 comp.setId_detalle(rs.getInt(1));
+                prodData.aumentarStock(id_producto, comp, id_compra);
                 JOptionPane.showMessageDialog(null, "El pedido se ha guardado exitosamente.");
                 
             }

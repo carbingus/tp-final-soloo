@@ -15,8 +15,18 @@ public class Menu extends javax.swing.JFrame {
 
         escritorio = new javax.swing.JDesktopPane();
         barraMenu = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuAdmin = new javax.swing.JMenu();
+        jMenuProductos = new javax.swing.JMenuItem();
+        jMenuClientes = new javax.swing.JMenuItem();
+        jMenuProveedores = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuStock = new javax.swing.JMenuItem();
+        jMenuVentas = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuPedidos = new javax.swing.JMenuItem();
+        jMenuVender = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuSalsita = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -31,17 +41,85 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 383, Short.MAX_VALUE)
         );
 
-        jMenu2.setText("Edit");
+        jMenuAdmin.setText("Administracion");
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuProductos.setText("Productos");
+        jMenuProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuProductosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenuAdmin.add(jMenuProductos);
 
-        barraMenu.add(jMenu2);
+        jMenuClientes.setText("Clientes");
+        jMenuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuClientesActionPerformed(evt);
+            }
+        });
+        jMenuAdmin.add(jMenuClientes);
+
+        jMenuProveedores.setText("Proveedores");
+        jMenuProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProveedoresActionPerformed(evt);
+            }
+        });
+        jMenuAdmin.add(jMenuProveedores);
+
+        barraMenu.add(jMenuAdmin);
+
+        jMenu3.setText("Consultas");
+
+        jMenuStock.setText("Consultar Stock");
+        jMenuStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuStockActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuStock);
+
+        jMenuVentas.setText("Consultar Ventas");
+        jMenuVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuVentasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuVentas);
+
+        barraMenu.add(jMenu3);
+
+        jMenu5.setText("Transacciones");
+
+        jMenuPedidos.setText("Realizar Pedidos");
+        jMenuPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuPedidosActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuPedidos);
+
+        jMenuVender.setText("Realizar Ventas");
+        jMenuVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuVenderActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuVender);
+
+        barraMenu.add(jMenu5);
+
+        jMenu4.setText("Salir");
+
+        jMenuSalsita.setText("Salir del sistema");
+        jMenuSalsita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalsitaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuSalsita);
+
+        barraMenu.add(jMenu4);
 
         setJMenuBar(barraMenu);
 
@@ -59,12 +137,51 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProductosActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        VistaPrueba vp = new VistaPrueba();
+        VistaProductos vp = new VistaProductos();
         centrarVentana(vp);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuProductosActionPerformed
+
+    private void jMenuStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuStockActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaStock vs = new VistaStock();
+        centrarVentana(vs);
+        
+    }//GEN-LAST:event_jMenuStockActionPerformed
+
+    private void jMenuSalsitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalsitaActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuSalsitaActionPerformed
+
+    private void jMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClientesActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaClientes vc = new VistaClientes();
+        centrarVentana(vc);
+    }//GEN-LAST:event_jMenuClientesActionPerformed
+
+    private void jMenuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProveedoresActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaProveedores vp = new VistaProveedores();
+        centrarVentana(vp);
+    }//GEN-LAST:event_jMenuProveedoresActionPerformed
+
+    private void jMenuVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVentasActionPerformed
+        
+    }//GEN-LAST:event_jMenuVentasActionPerformed
+
+    private void jMenuPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPedidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuPedidosActionPerformed
+
+    private void jMenuVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuVenderActionPerformed
 
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
@@ -113,7 +230,17 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenuAdmin;
+    private javax.swing.JMenuItem jMenuClientes;
+    private javax.swing.JMenuItem jMenuPedidos;
+    private javax.swing.JMenuItem jMenuProductos;
+    private javax.swing.JMenuItem jMenuProveedores;
+    private javax.swing.JMenuItem jMenuSalsita;
+    private javax.swing.JMenuItem jMenuStock;
+    private javax.swing.JMenuItem jMenuVender;
+    private javax.swing.JMenuItem jMenuVentas;
     // End of variables declaration//GEN-END:variables
 }

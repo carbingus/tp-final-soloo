@@ -3,6 +3,7 @@ package Entidades;
 public class Producto {
     private int id_producto;
     private String nombre;
+    private String categoria;
     private double precio;
     private int stock;
     private boolean estado;
@@ -10,19 +11,29 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String nombre, double precio, int stock, boolean estado) {
+    public Producto(String nombre, String categoria, double precio, int stock, boolean estado) {
         this.nombre = nombre;
+        this.categoria = categoria;
         this.precio = precio;
         this.stock = stock;
         this.estado = estado;
     }
 
-    public Producto(int id_producto, String nombre, double precio, int stock, boolean estado) {
+    public Producto(int id_producto, String nombre, String categoria, double precio, int stock, boolean estado) {
         this.id_producto = id_producto;
         this.nombre = nombre;
+        this.categoria = categoria;
         this.precio = precio;
         this.stock = stock;
         this.estado = estado;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public int getId_producto() {

@@ -21,7 +21,7 @@ import AccesoADatos.*;
 public class DetalleVentaData {
     
     private Connection con = null;
-//    private ProductoData prodData = new ProductoData();
+    private ProductoData prodData = new ProductoData();
 //    private ClienteData cliData = new ClienteData();
 
     public DetalleVentaData() {
@@ -42,6 +42,7 @@ public class DetalleVentaData {
             
             if (rs.next()){
                 vent.setId_detalleVenta(rs.getInt(1));
+                prodData.restarStock(id_producto, vent, id_venta);
                 JOptionPane.showMessageDialog(null, "Los detalles de venta se han guardado exitosamente.");
                 
             }

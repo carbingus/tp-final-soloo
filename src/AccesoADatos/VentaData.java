@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class VentaData {
     private Connection con = null;   
+    private ProductoData prodData;
 
     public VentaData() {
         con = Conexion.getConexion();
@@ -40,6 +41,7 @@ public class VentaData {
             while (rs.next()){
                 venta.setId_venta(rs.getInt("idVenta"));
                 JOptionPane.showMessageDialog(null, "Venta guardada.");
+                
             }
             ps.close();
             

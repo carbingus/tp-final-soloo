@@ -45,7 +45,7 @@ public class CompraData {
                 JOptionPane.showMessageDialog(null, "Compra guardada");
             }
 
-            rs.close();
+            
             ps.close();
 
         } catch (SQLException ex) {
