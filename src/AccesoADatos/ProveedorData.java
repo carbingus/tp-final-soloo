@@ -32,7 +32,7 @@ public class ProveedorData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,proveedor.getRazonSocial());
             ps.setString(2,proveedor.getDomicilio());
-            ps.setInt(3, proveedor.getTelefono());
+            ps.setString(3, proveedor.getTelefono());
             ps.setBoolean(4, proveedor.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -59,7 +59,7 @@ public class ProveedorData {
             ps = con.prepareStatement(sql);
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
-            ps.setInt(3, proveedor.getTelefono());
+            ps.setString(3, proveedor.getTelefono());
             ps.setBoolean(4, proveedor.isEstado());
             int logro = ps.executeUpdate();
             
@@ -87,7 +87,7 @@ public class ProveedorData {
                 proveedor.setId_proveedor(rs.getInt("idProveedor"));
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
-                proveedor.setTelefono(rs.getInt("telefono"));
+                proveedor.setTelefono(rs.getString("telefono"));
                 proveedores.add(proveedor);
             }
             ps.close();
@@ -111,13 +111,37 @@ public class ProveedorData {
                 proveedor.setId_proveedor(id);
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
-                proveedor.setTelefono(rs.getInt("telefono"));
+                proveedor.setTelefono(rs.getString("telefono"));
                 proveedor.setEstado(rs.getBoolean("estado"));
                 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el proveedor indicado.");
             }
             ps.close();
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor. Codigo: " +ex.getLocalizedMessage());
+        }
+        return proveedor;
+    }
+    
+    public Proveedor buscarProveedorPorTelefono(String telefono){
+        Proveedor proveedor = new Proveedor();
+        String sql = "SELECT * FROM proveedor where telefono = ?;";
+        PreparedStatement ps = null;
+        
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, telefono);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+//                proveedor.setId_proveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
+            } else {
+                JOptionPane.showMessageDialog(null, "El telefono indicado no pertenece a un Proveedor en\nla base de datos.");
+            }
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor. Codigo: " +ex.getLocalizedMessage());
         }

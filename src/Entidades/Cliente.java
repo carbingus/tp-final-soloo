@@ -12,19 +12,20 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String apellido, String nombre, String domicilio, int dni, String telefono, boolean estado) {
-        this.apellido = apellido;
+    public Cliente(String nombre, String apellido, String domicilio, int dni, String telefono, boolean estado) {
+        
         this.nombre = nombre;
+        this.apellido = apellido;
         this.domicilio = domicilio;
         this.dni = dni;
         this.telefono = telefono;
         this.estado = estado;
     }
 
-    public Cliente(int id_cliente, String apellido, String nombre, String domicilio, int dni, String telefono, boolean estado) {
+    public Cliente(int id_cliente, String nombre, String apellido, String domicilio, int dni, String telefono, boolean estado) {
         this.id_cliente = id_cliente;
-        this.apellido = apellido;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.domicilio = domicilio;
         this.dni = dni;
         this.telefono = telefono;

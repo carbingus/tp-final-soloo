@@ -156,6 +156,36 @@ public class ClienteData {
             }
             return cliente;
         }
+        
+        public void eliminarCliente(int id){
+            try{
+                String sql = "UPDATE cliente SET estado = 0 WHERE idCliente = ?;";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, id);
+                int fila = ps.executeUpdate();
+                ps.close();
+                if (fila == 1){
+                    JOptionPane.showMessageDialog(null, "EL cliente fue desactivado correctamente.");
+                }
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error al acceder a tabla Cliente. Codigo: " + ex.getLocalizedMessage());
+            }
+        }
+            
+        public void restaurarCliente(int id){
+            try{
+                String sql = "UPDATE cliente SET estado = 1 WHERE idCliente =?;";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, id);
+                int fila = ps.executeUpdate();
+                ps.close();
+                if (fila == 1)
+                    JOptionPane.showMessageDialog(null, "El cliente fue reactivado exitosamente");
+
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error al acceder a tabla Cliente. Codigo: " + ex.getLocalizedMessage());
+            }
+        }
     }
 
 

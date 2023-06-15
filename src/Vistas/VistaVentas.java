@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package Vistas;
-
+import Entidades.*;
+import AccesoADatos.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author extha
  */
 public class VistaVentas extends javax.swing.JInternalFrame {
+
 
     /**
      * Creates new form VistaVentas

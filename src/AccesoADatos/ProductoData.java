@@ -85,8 +85,8 @@ public class ProductoData {
         return producto;
     }
     
-    public Producto buscarProductosPorCategoria(String cate){
-        String sql = "SELECT * FROM producto WHERE categoria = ?;";
+    public Producto buscarProductosPorNombre(String nombre){
+        String sql = "SELECT * FROM producto WHERE nombre = ?;";
         Producto pr = null;
         PreparedStatement ps = null;
         try{
@@ -95,6 +95,7 @@ public class ProductoData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 pr.setNombre(rs.getString("nombre"));
+                pr.setCategoria(rs.getString("categoria"));
                 pr.setPrecio(rs.getDouble("precio"));
                 pr.setStock(rs.getInt("stock"));
             } else {
@@ -173,6 +174,29 @@ public class ProductoData {
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder tabla Producto. Codigo: " +ex.getLocalizedMessage());
         }
+    }
+    
+    public List<Producto> listarProductos(){
+        List<Producto> productos = new ArrayList<>();
+        try{
+            String sql = "SELECT * FROM producto WHERE estado = 1;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Producto producto = new Producto();
+                producto.setId_producto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setCategoria(rs.getString("categoria"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+                
+            }
+            ps.close();
+        } catch(SQLException ex){
+            JOptionPane.showConfirmDialog(null, "Error al acceder a tabla Producto. Codigo: " +ex.getLocalizedMessage());
+        
+        } return productos;
     }
     
 }
