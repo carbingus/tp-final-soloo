@@ -19,6 +19,7 @@ public class VistaStock extends javax.swing.JInternalFrame {
     private DefaultTableModel tablin;
     private ProductoData prodData;
     private ArrayList<Producto> productos;
+
     
     public VistaStock() {
         initComponents();
@@ -87,7 +88,6 @@ public class VistaStock extends javax.swing.JInternalFrame {
         jbtnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
-        jbtnEliminar = new javax.swing.JButton();
         jbtnModificar = new javax.swing.JButton();
         jlblInfo = new javax.swing.JLabel();
         jbtSalir = new javax.swing.JButton();
@@ -125,14 +125,6 @@ public class VistaStock extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(tablaProductos);
-
-        jbtnEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jbtnEliminar.setText("Eliminar");
-        jbtnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnEliminarActionPerformed(evt);
-            }
-        });
 
         jbtnModificar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jbtnModificar.setText("Modificar");
@@ -178,8 +170,6 @@ public class VistaStock extends javax.swing.JInternalFrame {
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jbtnModificar)
-                        .addGap(172, 172, 172)
-                        .addComponent(jbtnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtSalir)))
                 .addContainerGap())
@@ -200,7 +190,6 @@ public class VistaStock extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnModificar)
-                    .addComponent(jbtnEliminar)
                     .addComponent(jbtSalir))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -234,10 +223,6 @@ public class VistaStock extends javax.swing.JInternalFrame {
 
         tablin.addRow(new Object[]{prod.getNombre(), prod.getCategoria(), prod.getPrecio(), prod.getStock(), prod.isEstado()});
     }//GEN-LAST:event_jbtnBuscarActionPerformed
-
-    private void jbtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtnEliminarActionPerformed
 
     private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
         int id = (int) tablin.getValueAt(tablaProductos.getSelectedRow(), 0);
@@ -287,7 +272,6 @@ public class VistaStock extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtSalir;
     private javax.swing.JButton jbtnBuscar;
-    private javax.swing.JButton jbtnEliminar;
     private javax.swing.JButton jbtnModificar;
     private javax.swing.JLabel jlblInfo;
     private javax.swing.JLabel jlblNombreProd;
