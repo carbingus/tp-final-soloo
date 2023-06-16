@@ -21,7 +21,8 @@ public class ClienteData {
     }
     
     public void guardarCliente(Cliente cliente){
-        String sql = "INSERT INTO cliente (nombre, apellido, domicilio, documento, telefono, estado) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cliente (nombre, apellido, domicilio, documento, telefono, estado)"
+                + " VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNombre()); // asignamos nombre
@@ -130,7 +131,8 @@ public class ClienteData {
         
         public Cliente buscarClientePorDni(int dni){
             Cliente cliente = null;
-            String sql = "SELECT idCliente, nombre, apellido, domicilio, documento, telefono, estado FROM cliente WHERE documento = ?";
+            String sql = "SELECT idCliente, nombre, apellido, domicilio, documento, telefono, estado"
+                    + " FROM cliente WHERE documento = ?";
             PreparedStatement ps = null;
             try {
                 ps = con.prepareStatement(sql);
