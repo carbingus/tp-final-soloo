@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -51,33 +52,66 @@ public class VentaData {
         
     }
     
-         public List<Venta> obtenerVentas(){
-         List <Venta> ventas = new ArrayList<>();
-         
+    public List<Venta> listarVentas(){
+         List<Venta> listaVentas = new ArrayList<>();
+        
+        String sql = "SELECT * FROM venta";
          try {
-            String sql = "SELECT * FROM venta;";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            Venta vend;
-
-            while (rs.next()){
-                vend = new Venta();
-                vend.setId_venta(rs.getInt("idVenta"));
-                vend.setFecha(rs.getDate("fecha").toLocalDate());
-                
-                Cliente c = new Cliente();
-                c.setId_cliente(rs.getInt("idCliente"));
-                vend.setCliente(c);
-                
-                ventas.add(vend);
-            }
-            ps.close();
-            } catch (SQLException ex){
-                JOptionPane.showMessageDialog(null, "Error al acceder a tabla Venta. Codigo: "+ex.getLocalizedMessage());
-
-            }
-         return ventas;
-     }
+             PreparedStatement ps = con.prepareStatement(sql);
+             
+             ResultSet rs = ps.executeQuery();
+             
+             while (rs.next()) {
+               Venta ven = new Venta();
+               Cliente cli = new Cliente();
+               cli.setId_cliente(rs.getInt("idCliente"));
+               
+               
+               ven.setId_venta(rs.getInt("idVenta"));
+               ven.setFecha(rs.getDate("fecha").toLocalDate());
+               ven.setCliente(cli);
+               
+               listaVentas.add(ven);
+             }
+             
+             
+         } catch (SQLException ex) {
+            
+         }
+        
+         return listaVentas;
+    } 
+        
     
-    
+
+
+    public List<Venta> obtenerVentas(int id){
+        List <Venta> ventas = new ArrayList<>();
+
+        try {
+           String sql = "SELECT * FROM venta WHERE idVenta = ?;";
+           PreparedStatement ps = con.prepareStatement(sql);
+           ResultSet rs = ps.executeQuery();
+           Venta vend;
+
+           while (rs.next()){
+               vend = new Venta();
+               vend.setId_venta(rs.getInt("idVenta"));
+               vend.setFecha(rs.getDate("fecha").toLocalDate());
+
+               Cliente c = new Cliente();
+               c.setId_cliente(rs.getInt("idCliente"));
+               vend.setCliente(c);
+
+               ventas.add(vend);
+           }
+           ps.close();
+           } catch (SQLException ex){
+               JOptionPane.showMessageDialog(null, "Error al acceder a tabla Venta. Codigo: "+ex.getLocalizedMessage());
+
+           }
+        return ventas;
+    }
+
 }
+
