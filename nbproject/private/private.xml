@@ -14,24 +14,16 @@
         <group>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/VistaCompras.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Entidades/Proveedor.java</file>
-            <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/AccesoADatos/CompraData.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/AccesoADatos/ClienteData.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/VistaStock.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/Menu.java</file>
-            <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/AccesoADatos/ProductoData.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Entidades/DetalleVenta.java</file>
-            <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/VistaPrueba.java</file>
-            <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/AccesoADatos/DetalleCompraData.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Entidades/Cliente.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Entidades/Producto.java</file>
-            <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/VistaProveedores.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Entidades/Compra.java</file>
-            <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/AccesoADatos/ProveedorData.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Entidades/Venta.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/VistaVender.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/AccesoADatos/VentaData.java</file>
-            <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/VistaClientes.java</file>
-            <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/VistaProductos.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/AccesoADatos/DetalleVentaData.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Entidades/DetalleCompra.java</file>
             <file>file:/D:/Programacion/Laboratorio/tp-final-Fravemax/tp-final-Fravemax-solop/tp-final-soloo/src/Vistas/VistaVentas.java</file>

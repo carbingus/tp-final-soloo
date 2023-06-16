@@ -5,22 +5,76 @@
 package Vistas;
 import Entidades.*;
 import AccesoADatos.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author extha
  */
 public class VistaVentas extends javax.swing.JInternalFrame {
+    
+    private DefaultTableModel tablin;
+    private DetalleVentaData dVenDa;
+    private VentaData venData;
+    private ArrayList<Venta> listaVentas;
+    private ClienteData clienData;
+    private Cliente cliente;
+    private Producto prod;
+    private ProductoData prodData;
 
 
-    /**
-     * Creates new form VistaVentas
-     */
     public VistaVentas() {
         initComponents();
-        setTitle("Formulario de Ventas");
+        setTitle("Lista de Ventas");
         setResizable(false);
+        tablin = new DefaultTableModel();
+        dVenDa = new DetalleVentaData();
+        venData = new VentaData();
+        clienData = new ClienteData();
+        prod = new Producto();
+        prodData = new ProductoData();
+                
+        
     }
+    
+    private void generarTabla(){
+        ArrayList<Object> columnas = new ArrayList<Object>();
+        columnas.add("ID");
+        columnas.add("Producto");
+        columnas.add("Cantidad");
+        columnas.add("Precio");
+        columnas.add("Cliente");
+        
+        for (Object columna : columnas){
+            tablin.addColumn(columna);
+        }
+        tablaProductos.setModel(tablin);
+        limpiarTablin();
+        accederTablin();
+    }
+    
+   private void limpiarTablin(){
+        int fila = tablin.getRowCount() - 1;
+        
+        for (int i = fila; i >= 0; i--){
+            tablin.removeRow(i);
+        }
+    }
+   
+    private void accederTablin(){
+        Venta vent = null;
+        int id = vent.getId_venta();
+        listaVentas = (ArrayList<Venta>) venData.obtenerVentas(id);
+
+        for (Venta vents : listaVentas) {
+
+            tablin.addRow(new Object[]{vents.getId_venta(), vents.getFecha(), vents.getCliente()});
+        }
+    }
+
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,21 +85,116 @@ public class VistaVentas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel = new javax.swing.JPanel();
+        jlblTitulo = new javax.swing.JLabel();
+        jbtnBuscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProductos = new javax.swing.JTable();
+        jbtSalir = new javax.swing.JButton();
+
+        jlblTitulo.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jlblTitulo.setText("Lista de ventas");
+
+        jbtnBuscar.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jbtnBuscar.setText("Buscar");
+        jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBuscarActionPerformed(evt);
+            }
+        });
+
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaProductos);
+
+        jbtSalir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jbtSalir.setText("Salir");
+        jbtSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtSalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(jlblTitulo))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(jbtSalir))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(232, 232, 232)
+                        .addComponent(jbtnBuscar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbtnBuscar)
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbtSalir)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
+
+        limpiarTablin();
+        Venta ven = (Venta) venData.listarVentas();
+        
+        tablin.addRow(new Object[]{ven.getId_venta(), ven.getFecha(), ven.getCliente()});
+        
+    }//GEN-LAST:event_jbtnBuscarActionPerformed
+
+    private void jbtSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbtSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtSalir;
+    private javax.swing.JButton jbtnBuscar;
+    private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JPanel panel;
+    private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
 }
