@@ -4,17 +4,76 @@
  */
 package Vistas;
 
+import AccesoADatos.*;
+import Entidades.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author extha
  */
 public class VistaVender extends javax.swing.JInternalFrame {
+    
+    private DefaultTableModel tablaCli;
+    private DefaultTableModel tablaProd;
+    private ClienteData clienData;
+    private ProductoData prodData;
+    private VentaData venData;
+    
+    private Cliente clienteActual;
+    private Producto productoActual;
+    private Venta ventaActual;
 
     /**
      * Creates new form VistaVender
      */
     public VistaVender() {
         initComponents();
+        setTitle("Realizar Ventas");
+        setResizable(false);
+        tablaCli = new DefaultTableModel();
+        clienData = new ClienteData();
+        clienteActual = new Cliente();
+        
+        tablaProd = new DefaultTableModel();
+        prodData = new ProductoData();
+        productoActual = new Producto();
+        
+        venData = new VentaData();
+        ventaActual = new Venta();
+        
+    }
+    
+    
+    public void generarTablaCliente(){
+        ArrayList<Object> colum = new ArrayList<Object>();
+        colum.add("ID");
+        colum.add("Nombre");
+        colum.add("Apellido");
+        colum.add("Domicilio");
+        colum.add("Telefono");
+        
+        for (Object columnas : colum){
+            tablaCli.addColumn(columnas);
+        }
+        jtblCliente.setModel(tablaCli);
+    }
+    
+    public void generarTablaProducto(){
+        ArrayList<Object> colum = new ArrayList<Object>();
+        colum.add("ID");
+        colum.add("Nombre");
+        colum.add("Categoria");
+        colum.add("Precio");
+        colum.add("Stock");
+        colum.add("Estado");
+        
+        for (Object columnas : colum){
+            tablaProd.addColumn(columnas);
+        }
+        jtblProducto.setModel(tablaProd);
     }
 
     /**
@@ -26,21 +85,220 @@ public class VistaVender extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jlblTitulo = new javax.swing.JLabel();
+        jlblProducto = new javax.swing.JLabel();
+        jlblCliente = new javax.swing.JLabel();
+        jtxtCliente = new javax.swing.JTextField();
+        jbtBuscarCli = new javax.swing.JButton();
+        jtxtProducto = new javax.swing.JTextField();
+        jbtBuscarProd = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtblCliente = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtblProducto = new javax.swing.JTable();
+        jlblFechaVenta = new javax.swing.JLabel();
+        jtxtFechaVenta = new javax.swing.JTextField();
+        jbtnVenta = new javax.swing.JButton();
+
+        jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jlblTitulo.setText("Realizar Ventas");
+
+        jlblProducto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlblProducto.setText("Producto:");
+
+        jlblCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlblCliente.setText("DNI Cliente:");
+
+        jtxtCliente.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jtxtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtClienteActionPerformed(evt);
+            }
+        });
+
+        jbtBuscarCli.setText("Buscar");
+        jbtBuscarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtBuscarCliActionPerformed(evt);
+            }
+        });
+
+        jtxtProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtxtProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtProductoActionPerformed(evt);
+            }
+        });
+
+        jbtBuscarProd.setText("Buscar");
+        jbtBuscarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtBuscarProdActionPerformed(evt);
+            }
+        });
+
+        jtblCliente.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jtblCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtblCliente);
+
+        jtblProducto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jtblProducto);
+
+        jlblFechaVenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlblFechaVenta.setText("Fecha Venta:");
+
+        jtxtFechaVenta.setEditable(false);
+        jtxtFechaVenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtxtFechaVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtFechaVentaActionPerformed(evt);
+            }
+        });
+
+        jbtnVenta.setText("Vender");
+        jbtnVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnVentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(167, 167, 167)
+                                .addComponent(jlblProducto)
+                                .addGap(26, 26, 26)
+                                .addComponent(jtxtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jlblCliente)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbtBuscarCli)
+                            .addComponent(jbtBuscarProd)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(267, 267, 267)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlblFechaVenta)
+                            .addComponent(jtxtFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(291, 291, 291)
+                        .addComponent(jbtnVenta)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jlblTitulo)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblCliente)
+                    .addComponent(jtxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtBuscarCli))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblProducto)
+                    .addComponent(jbtBuscarProd))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlblFechaVenta)
+                .addGap(18, 18, 18)
+                .addComponent(jtxtFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbtnVenta)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtxtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtClienteActionPerformed
+
+    private void jtxtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtProductoActionPerformed
+
+    private void jbtBuscarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscarCliActionPerformed
+
+        clienteActual = clienData.buscarClientePorDni(Integer.valueOf(jtxtCliente.getText()));
+
+        tablaCli.addRow(new Object[]{clienteActual.getId_cliente(), clienteActual.getNombre(), clienteActual.getApellido(), clienteActual.getDomicilio(), clienteActual.getTelefono()});
+
+    }//GEN-LAST:event_jbtBuscarCliActionPerformed
+
+    private void jbtBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscarProdActionPerformed
+        productoActual = prodData.buscarProductosPorNombre(jtxtProducto.getText().toLowerCase());
+
+        tablaProd.addRow(new Object[]{productoActual.getId_producto(),productoActual.getNombre(),productoActual.getCategoria(), productoActual.getPrecio(),productoActual.getStock(),productoActual.isEstado()});
+    }//GEN-LAST:event_jbtBuscarProdActionPerformed
+
+    private void jtxtFechaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtFechaVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtFechaVentaActionPerformed
+
+    private void jbtnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVentaActionPerformed
+
+        ventaActual.setCliente(clienteActual);
+
+        String fecha = "1996-03-21";
+        LocalDate fechaLocal = LocalDate.parse(fecha);
+        ventaActual.setFecha(fechaLocal);
+        venData.registrarVenta(ventaActual,clienteActual.getId_cliente());
+    }//GEN-LAST:event_jbtnVentaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbtBuscarCli;
+    private javax.swing.JButton jbtBuscarProd;
+    private javax.swing.JButton jbtnVenta;
+    private javax.swing.JLabel jlblCliente;
+    private javax.swing.JLabel jlblFechaVenta;
+    private javax.swing.JLabel jlblProducto;
+    private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JTable jtblCliente;
+    private javax.swing.JTable jtblProducto;
+    private javax.swing.JTextField jtxtCliente;
+    private javax.swing.JTextField jtxtFechaVenta;
+    private javax.swing.JTextField jtxtProducto;
     // End of variables declaration//GEN-END:variables
 }
