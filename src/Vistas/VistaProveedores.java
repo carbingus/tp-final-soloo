@@ -209,8 +209,9 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
         try {
             String nombre = jtxtRazon.getText();
             String domicilio = jtxtDomi.getText();
-            String telefono = jtxtTelef.getText();
-            if (nombre.isEmpty() || domicilio.isEmpty() || telefono.isEmpty()) {
+            long telefono = Long.parseLong(jtxtTelef.getText());
+            String telefonoParse = String.valueOf(telefono);
+            if (nombre.isEmpty() || domicilio.isEmpty() || String.valueOf(telefono).isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
 
@@ -219,7 +220,7 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
             boolean estado = jrbtStado.isSelected();
 
             if (proveedorActual == null) {
-                proveedorActual = new Proveedor(nombre, domicilio, telefono, estado);
+                proveedorActual = new Proveedor(nombre, domicilio, telefonoParse, estado);
 
                 provData.guardarProveedor(proveedorActual);
 
@@ -243,8 +244,9 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
     private void jbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscarActionPerformed
         // TODO add your handling code here:
         try{
-            String telefono = jtxtTelef.getText();
-            proveedorActual = provData.buscarProveedorPorTelefono(telefono);
+            long telefono = Long.parseLong(jtxtTelef.getText());
+            String telefonoParse = String.valueOf(telefono);
+            proveedorActual = provData.buscarProveedorPorTelefono(telefonoParse);
 
             if (proveedorActual != null) {
                 
@@ -262,8 +264,11 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
             try {
             String nombre = jtxtRazon.getText();
             String domicilio = jtxtDomi.getText();
-            String telefono = jtxtTelef.getText();
-            if (nombre.isEmpty() || domicilio.isEmpty() || telefono.isEmpty()) {
+            long telefono = Long.parseLong(jtxtTelef.getText());
+            String telefonoParse = String.valueOf(telefono);
+            
+//            long telefonoParse = Long.parseLong(telefono);
+            if (nombre.isEmpty() || domicilio.isEmpty() || String.valueOf(telefono).isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
 
@@ -274,7 +279,7 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
             if (proveedorActual != null) {
                 proveedorActual.setRazonSocial(nombre);
                 proveedorActual.setDomicilio(domicilio);
-                proveedorActual.setTelefono(telefono);
+                proveedorActual.setTelefono(telefonoParse);
                 proveedorActual.setEstado(estado);
                 provData.modificarProveedor(proveedorActual);
 

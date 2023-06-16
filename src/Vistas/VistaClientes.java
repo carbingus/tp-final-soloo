@@ -328,8 +328,9 @@ public class VistaClientes extends javax.swing.JInternalFrame {
             String nombre = jtxtNombre.getText();
             String apellido = jtxtApell.getText();
             String domicilio = jtxtDomi.getText();
-            String telefono = jtxtTelef.getText();
-            if (nombre.isEmpty() || apellido.isEmpty() || domicilio.isEmpty() || telefono.isEmpty() || String.valueOf(documento).isEmpty()) {
+            long telefono = Long.parseLong(jtxtTelef.getText());
+            String telefonoParse = String.valueOf(telefono);
+            if (nombre.isEmpty() || apellido.isEmpty() || domicilio.isEmpty() || String.valueOf(telefono).isEmpty() || String.valueOf(documento).isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
 
@@ -337,7 +338,7 @@ public class VistaClientes extends javax.swing.JInternalFrame {
             boolean estado = jrbtStado.isSelected();
 
             if (clienteActual == null) {
-                clienteActual = new Cliente(nombre, apellido, domicilio, documento, telefono, estado);
+                clienteActual = new Cliente(nombre, apellido, domicilio, documento, telefonoParse, estado);
 
                 clidData.guardarCliente(clienteActual);
 
@@ -346,7 +347,7 @@ public class VistaClientes extends javax.swing.JInternalFrame {
                 clienteActual.setApellido(apellido);
                 clienteActual.setDomicilio(domicilio);
                 clienteActual.setDni(documento);
-                clienteActual.setTelefono(telefono);
+                clienteActual.setTelefono(telefonoParse);
                 clienteActual.setEstado(estado);
                 clidData.modificarCliente(clienteActual);
             }
@@ -365,7 +366,8 @@ public class VistaClientes extends javax.swing.JInternalFrame {
         String nombre = jtxtNombre.getText();
         String apellido = jtxtApell.getText();
         String domicilio = jtxtDomi.getText();
-        String telefono = jtxtTelef.getText();
+        long telefono = Long.parseLong(jtxtTelef.getText());
+        String telefonoParse = String.valueOf(telefono);
         int documento = Integer.parseInt(jtxtDNI.getText());
         
         if (nombre.isEmpty() || apellido.isEmpty()) {
@@ -376,7 +378,7 @@ public class VistaClientes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "El domicilio no puede estar vacio.");
             return;
         }
-        if (telefono.isEmpty()){
+        if (String.valueOf(telefono).isEmpty()){
             JOptionPane.showMessageDialog(this, "Es necesario un numero de telefono para contactar el cliente.");
             return;
         }
@@ -395,9 +397,8 @@ public class VistaClientes extends javax.swing.JInternalFrame {
             clienteActual.setApellido(apellido);
             clienteActual.setDomicilio(domicilio);
             clienteActual.setDni(documento);
-            
-            
-            
+            clienteActual.setTelefono(telefonoParse);
+
             clienteActual.setEstado(estado);
             clidData.modificarCliente(clienteActual);
         }
