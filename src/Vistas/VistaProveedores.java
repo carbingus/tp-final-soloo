@@ -50,6 +50,7 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
         jlblRazon = new javax.swing.JLabel();
         jlblDomi = new javax.swing.JLabel();
         jtxtDomi = new javax.swing.JTextField();
+        jbtModificar = new javax.swing.JButton();
 
         jlblTelef.setText("Telefono");
 
@@ -117,6 +118,13 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
 
         jlblDomi.setText("Domicilio");
 
+        jbtModificar.setText("Modificar");
+        jbtModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,14 +153,16 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbtAgregar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtSalir))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlblRazon, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                                 .addComponent(jtxtRazon, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(90, 90, 90)))
+                                .addGap(90, 90, 90))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jbtAgregar)
+                                .addGap(43, 43, 43)
+                                .addComponent(jbtModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbtSalir)))
                         .addGap(42, 42, 42))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -183,7 +193,8 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtAgregar)
-                    .addComponent(jbtSalir))
+                    .addComponent(jbtSalir)
+                    .addComponent(jbtModificar))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -213,16 +224,12 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
                 provData.guardarProveedor(proveedorActual);
 
             } else {
-                proveedorActual.setRazonSocial(nombre);
-                proveedorActual.setDomicilio(domicilio);
-                proveedorActual.setTelefono(telefono);
-                proveedorActual.setEstado(estado);
-                provData.modificarProveedor(proveedorActual);
+                JOptionPane.showMessageDialog(this, "No se puede modificar un proveedor de esta forma. Utilice el boton ''Modificar''.");
             }
 
-        } catch (Error e) {
+        } catch (NullPointerException ex) {
 
-            JOptionPane.showMessageDialog(this, "Algo ha salido mal. Codigo: " +e.getLocalizedMessage());
+            JOptionPane.showMessageDialog(this, "Algo ha salido mal. Codigo: " +ex.getLocalizedMessage());
         }
         limpiarFormulario();
         proveedorActual = null;
@@ -251,6 +258,35 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbtBuscarActionPerformed
 
+    private void jbtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtModificarActionPerformed
+        try {
+            String nombre = jtxtRazon.getText();
+            String domicilio = jtxtDomi.getText();
+            String telefono = jtxtTelef.getText();
+            
+            if (nombre.isEmpty() || domicilio.isEmpty() || telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
+                return;
+
+            }
+
+            boolean estado = jrbtStado.isSelected();
+
+            if (proveedorActual!=null) {
+                proveedorActual.setRazonSocial(nombre);
+                proveedorActual.setDomicilio(domicilio);
+                proveedorActual.setTelefono(telefono);
+                proveedorActual.setEstado(estado);
+                provData.modificarProveedor(proveedorActual);
+            }
+        } catch (NullPointerException ex) {
+
+            JOptionPane.showMessageDialog(this, "Algo ha salido mal. Codigo: " +ex.getLocalizedMessage());
+        }
+        limpiarFormulario();
+        proveedorActual = null;
+    }//GEN-LAST:event_jbtModificarActionPerformed
+
         private void limpiarFormulario(){
         
         jtxtRazon.setText("");
@@ -265,6 +301,7 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtAgregar;
     private javax.swing.JButton jbtBuscar;
+    private javax.swing.JButton jbtModificar;
     private javax.swing.JButton jbtSalir;
     private javax.swing.JLabel jlblDomi;
     private javax.swing.JLabel jlblIconito;
