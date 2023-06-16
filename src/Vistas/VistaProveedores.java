@@ -224,7 +224,7 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
                 provData.guardarProveedor(proveedorActual);
 
             } else {
-                JOptionPane.showMessageDialog(this, "No se puede modificar un proveedor de esta forma. Utilice el boton ''Modificar''.");
+                JOptionPane.showMessageDialog(this, "Para modificar datos de proveedor, utilice la opcion ''Modificar''.");
             }
 
         } catch (NullPointerException ex) {
@@ -247,12 +247,10 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
             proveedorActual = provData.buscarProveedorPorTelefono(telefono);
 
             if (proveedorActual != null) {
-                //Cambiar int a string
+                
                 jtxtRazon.setText(proveedorActual.getRazonSocial());
                 jtxtDomi.setText(proveedorActual.getDomicilio());
                 jrbtStado.setSelected(proveedorActual.isEstado());
-            } else {
-                JOptionPane.showMessageDialog(this, "No se puede agregar un cliente a travez del boton ''Modificar''.\nUtilice el boton ''Agregar''.");
             }
 
         }catch(NullPointerException ex){
@@ -261,26 +259,30 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtBuscarActionPerformed
 
     private void jbtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtModificarActionPerformed
-        try {
+            try {
             String nombre = jtxtRazon.getText();
             String domicilio = jtxtDomi.getText();
             String telefono = jtxtTelef.getText();
-            
             if (nombre.isEmpty() || domicilio.isEmpty() || telefono.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
 
             }
-
+            
             boolean estado = jrbtStado.isSelected();
 
-            if (proveedorActual!=null) {
+            if (proveedorActual != null) {
                 proveedorActual.setRazonSocial(nombre);
                 proveedorActual.setDomicilio(domicilio);
                 proveedorActual.setTelefono(telefono);
                 proveedorActual.setEstado(estado);
                 provData.modificarProveedor(proveedorActual);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Utilice el boton ''Agregar'' para añadir un nuevo proveedor.");
+
             }
+
         } catch (NullPointerException ex) {
 
             JOptionPane.showMessageDialog(this, "Algo ha salido mal. Codigo: " +ex.getLocalizedMessage());
