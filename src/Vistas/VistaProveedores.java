@@ -251,9 +251,11 @@ public class VistaProveedores extends javax.swing.JInternalFrame {
                 jtxtRazon.setText(proveedorActual.getRazonSocial());
                 jtxtDomi.setText(proveedorActual.getDomicilio());
                 jrbtStado.setSelected(proveedorActual.isEstado());
+            } else {
+                JOptionPane.showMessageDialog(this, "No se puede agregar un cliente a travez del boton ''Modificar''.\nUtilice el boton ''Agregar''.");
             }
 
-        }catch(Error ex){
+        }catch(NullPointerException ex){
             JOptionPane.showMessageDialog(null, "Algo ha salido mal. Codigo: " + ex.getLocalizedMessage());
         }
     }//GEN-LAST:event_jbtBuscarActionPerformed
